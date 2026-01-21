@@ -2,7 +2,7 @@ import streamlit as st
 from utils.data_loader import DataLoader
 
 def render():
-    st.header("📁 Step 1: Data Import")
+    st.header("Step 1: Data Import")
     st.write("Upload your dataset to begin the analysis")
     
     uploaded_file = st.file_uploader(
@@ -18,14 +18,14 @@ def render():
             st.session_state.data = df
             info = DataLoader.get_data_info(df)
             
-            st.success(f"✅ File uploaded successfully!")
+            st.success(f"File uploaded successfully!")
             
             # Display data info in tabs
-            tab1, tab2, tab3 = st.tabs(["📋 Preview", "ℹ️ Information", "📊 Statistics"])
+            tab1, tab2, tab3 = st.tabs(["Preview", "Information", "Statistics"])
             
             with tab1:
                 st.subheader("Dataset Preview")
-                st.dataframe(df.head(10), use_container_width=True)
+                st.dataframe(df.head(10), width='stretch')
             
             with tab2:
                 st.subheader("Dataset Information")
@@ -38,12 +38,12 @@ def render():
                     st.metric("Duplicate Rows", df.duplicated().sum())
                 
                 st.write("**Column Details:**")
-                st.dataframe(info['column_info'], use_container_width=True)
+                st.dataframe(info['column_info'], width='stretch')
             
             with tab3:
                 st.subheader("Statistical Summary")
-                st.dataframe(df.describe(), use_container_width=True)
+                st.dataframe(df.describe(), width='stretch')
             
-            st.info("✨ Data loaded successfully! Click 'Next' to proceed to preprocessing.")
+            st.info("Data loaded successfully! Click 'Next' to proceed to preprocessing.")
     else:
-        st.info("👆 Please upload a dataset to get started")
+        st.info("Please upload a dataset to get started")

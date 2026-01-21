@@ -68,10 +68,10 @@ if 'current_step' not in st.session_state:
 
 # Define steps
 STEPS = [
-    {"name": "Data Import", "icon": "📁"},
-    {"name": "Preprocessing", "icon": "🔧"},
-    {"name": "Algorithms", "icon": "🚀"},
-    {"name": "Results", "icon": "📊"}
+    {"name": "Data Import", "icon": ""},
+    {"name": "Preprocessing", "icon": ""},
+    {"name": "Algorithms", "icon": ""},
+    {"name": "Results", "icon": ""}
 ]
 
 # Title
@@ -94,19 +94,19 @@ st.markdown("---")
 
 # Sidebar - Step Overview
 with st.sidebar:
-    st.header("📋 Steps Overview")
+    st.header("Steps Overview")
     for idx, step in enumerate(STEPS):
         if idx < current_step:
             st.success(f"{step['icon']} {step['name']} ✓")
         elif idx == current_step:
-            st.info(f"➡️ {step['icon']} {step['name']} (Current)")
+            st.info(f"{step['icon']} {step['name']} (Current)")
         else:
             st.write(f"{step['icon']} {step['name']}")
     
     st.markdown("---")
     
     # Reset button
-    if st.button("🔄 Start Over"):
+    if st.button("Start Over"):
         st.session_state.current_step = 0
         st.session_state.data = None
         st.session_state.preprocessed_data = None
@@ -129,7 +129,7 @@ col1, col2, col3 = st.columns([1, 2, 1])
 
 with col1:
     if current_step > 0:
-        if st.button("⬅️ Back", use_container_width=True, key="back_btn"):
+        if st.button("Back", width='stretch', key="back_btn"):
             st.session_state.current_step -= 1
             st.rerun()
 
@@ -143,12 +143,12 @@ with col3:
             can_proceed = False
         
         if can_proceed:
-            if st.button("Next ➡️", use_container_width=True, key="next_btn"):
+            if st.button("Next", width='stretch', key="next_btn"):
                 st.session_state.current_step += 1
                 st.rerun()
         else:
-            st.button("Next ➡️", use_container_width=True, disabled=True, key="next_btn_disabled")
+            st.button("Next", width='stretch', disabled=True, key="next_btn_disabled")
             if current_step == 0:
-                st.caption("⚠️ Please upload data first")
+                st.caption("Please upload data first")
             elif current_step == 1:
-                st.caption("⚠️ Please preprocess data first")
+                st.caption("Please preprocess data first")

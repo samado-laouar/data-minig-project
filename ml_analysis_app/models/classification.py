@@ -5,7 +5,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 from config.settings import Config
-
+from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix, roc_curve, auc, roc_auc_score
+from sklearn.preprocessing import label_binarize
 class ClassificationModels:
     @staticmethod
     def run_knn(X, y, test_size=Config.TEST_SIZE_DEFAULT):
@@ -82,3 +84,4 @@ class ClassificationModels:
             'accuracy': accuracy,
             'iterations': nn.n_iter_
         }
+    
